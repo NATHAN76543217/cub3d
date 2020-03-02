@@ -1,0 +1,29 @@
+R 1280 750
+
+NO ./assets/images/solv2.xpm
+SO ./assets/images/floor.xpm
+WE ./assets/images/bricks64.xpm
+EA ./assets/images/banana.xpm
+
+V ./assets/images/viseur.xpm
+
+S ./assets/images/tux.xpm
+S3 ./assets/images/baril.xpm
+S4 ./assets/images/clown.xpm
+F ./assets/images/shinning.xpm
+C ./assets/images/beton.xpm
+
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+1 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 0 0 3 0 0 0 0 4 1 0 0 0 1
+1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1
+1 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1
+1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 2 1 1 1 1 4 0 0 1
+1 1 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 0 0 0 1 0 0 0 1
+1 1 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 1 0 1 0 1 0 0 1 0 1 0 1
+1 1 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 0 0 0 0 0 0 1 0 3 0 1
+1 0 0 0 3 0 0 4 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 1 0 2 2 1
+1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 0 1 0 0 0 1
+1 1 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 1 1 0 0 0 0 0 0 N 0 1
+1 1 1 1 0 1 1 1 1 1 1 1 0 1 0 1 1 1 1 1 0 1 1 1 1 0 0 0 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
