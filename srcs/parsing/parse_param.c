@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_param.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgascon <dgascon@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 14:32:18 by dgascon           #+#    #+#             */
-/*   Updated: 2020/02/24 17:07:20 by dgascon          ###   ########lyon.fr   */
+/*   Updated: 2020/05/01 10:22:21 by dgascon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	parse_floor_ceil2(t_data *data, char **line, char state)
 	}
 	else
 	{
-		if (init_texture(data, &data->w_tex[i], line[1]))
+		if (dup_path(&data->w_tex[i], line[1]))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -82,7 +82,7 @@ static int	parse_floor_ceil2(t_data *data, char **line, char state)
 
 int			parse_floor_ceil(t_data *data, char **line)
 {
-	if (!(ft_strcmp(line[0], "F")))
+	if (line[0][0] == 'F')
 	{
 		if (data->screen.flag_floor)
 			return (ft_msg(TM_ERROR, "Double argument to floor", 1, RED));
@@ -90,7 +90,7 @@ int			parse_floor_ceil(t_data *data, char **line)
 		if (parse_floor_ceil2(data, line, 'F'))
 			return (EXIT_FAILURE);
 	}
-	else if (!(ft_strcmp(line[0], "C")))
+	else if (line[0][0] == 'C')
 	{
 		if (data->screen.flag_ceil)
 			return (ft_msg(TM_ERROR, "Double argument to ceil", 1, RED));

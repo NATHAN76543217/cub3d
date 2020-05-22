@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgascon <dgascon@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 17:30:10 by dgascon           #+#    #+#             */
-/*   Updated: 2020/02/24 16:36:45 by dgascon          ###   ########lyon.fr   */
+/*   Updated: 2020/05/01 10:21:29 by dgascon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ typedef struct s_data	t_data;
 typedef struct	s_world
 {
 	char		**map;
+	int			*leny;
 	t_coord		size;
 }				t_world;
 
-
-
-char			**filter(char *line);
 int				parse_floor_ceil(t_data *data, char **line);
 int				parse_set_object(t_data *data, char **line);
 int				parse_set_tex(t_data *data, char **line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgascon <dgascon@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 15:08:05 by dgascon           #+#    #+#             */
-/*   Updated: 2020/02/24 16:26:39 by dgascon          ###   ########lyon.fr   */
+/*   Updated: 2020/05/01 10:22:01 by dgascon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 int		parse_player(t_data *data, char direction, t_coord position)
 {
 	if (data->player.pos.x != 0 && data->player.pos.y != 0)
-	{
-		ft_printf("Two player placed on the map\n");
-		wrdestroy();
-		return (-1);
-	}
+		return (ft_msg(TM_ERROR, "Too player placed on the map !", 1, RED));
 	if (direction == 'N')
 		data->player.pov = M_PI / 2;
 	else if (direction == 'E')
@@ -30,5 +26,5 @@ int		parse_player(t_data *data, char direction, t_coord position)
 		data->player.pov = M_PI;
 	data->player.pos.x = (BLOCK_SIZE * position.x) + BLOCK_SIZE / 2;
 	data->player.pos.y = (BLOCK_SIZE * position.y) - BLOCK_SIZE / 2;
-	return (1);
+	return (EXIT_SUCCESS);
 }

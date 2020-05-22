@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgascon <dgascon@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 16:51:58 by dgascon           #+#    #+#             */
-/*   Updated: 2020/02/18 16:51:59 by dgascon          ###   ########lyon.fr   */
+/*   Updated: 2020/05/01 10:21:23 by dgascon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ typedef struct	s_raycast
 
 float			short_dist(t_data *data);
 int				fill_column(t_data *data, int direction);
+void			print_sprite(t_data *data);
 float			linear_intersec_h(t_data *data);
 float			linear_intersec_v(t_data *data);
 void			fill_background(t_data *data);
 float			browse_h(t_data *data, t_f_coord intersec, t_f_coord offset);
+float			browse_v(t_data *data, t_f_coord intersec, t_f_coord offset);
+
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgascon <dgascon@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 17:27:41 by dgascon           #+#    #+#             */
-/*   Updated: 2020/02/24 16:27:04 by dgascon          ###   ########lyon.fr   */
+/*   Updated: 2020/05/01 10:21:20 by dgascon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "cub3d.h"
 # include "raycast.h"
 
-# define MAX_SPEED 25
+# define MAX_SPEED 15
 
 typedef struct s_data	t_data;
 
@@ -24,7 +24,7 @@ typedef struct		s_player
 	float			fov;
 	float			pov;
 	int				height_cam;
-	t_coord			pos;
+	t_f_coord		pos;
 	int				speed;
 	float			dist_proj_plane;
 	int				cst;

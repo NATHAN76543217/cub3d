@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgascon <dgascon@student.le-101.fr>        +#+  +:+       +#+         #
+#    By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/18 16:51:32 by dgascon           #+#    #+#              #
-#    Updated: 2020/02/26 13:38:59 by nlecaill         ###   ########lyon.fr    #
+#    Updated: 2020/05/05 18:27:35 by dgascon          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY:	all clean fclean re
 
-NAME			=	Cub3d
+NAME			=	Cub3D
 
 PATH_INC		=	includes
 
@@ -20,13 +20,13 @@ PATH_SRC		=	srcs
 PATH_OBJ		=	objs
 SRC_LIST		= 	engine/raycasting.c engine/render.c engine/linear_intersec.c 	\
 					engine/mlx_geometrical.c	engine/floor_and_ceil.c				\
-					engine/textures.c engine/floor_and_ceil2.c						\
+					engine/textures.c engine/floor_and_ceil2.c	engine/sprites.c	\
 					parsing/parse.c	parsing/minimap.c parsing/parse_param.c			\
-					parsing/parse_object.c											\
+					parsing/parse_object.c parsing/checkwalls.c						\
 					keycontrol/actionscontrol.c keycontrol/keypress.c				\
 					keycontrol/keyreleased.c										\
 					entities/player.c entities/move.c								\
-					garbage.c lst.c	screen.c world.c save_as_bmp.c get_index_byte.c \
+					garbage.c lst.c	screen.c world.c save_as_bmp.c					\
 
 INCS_LIST		=	cub3d.h player.h world.h raycast.h screen.h
 
@@ -39,19 +39,19 @@ LIBFT_NAME		=	libft.a
 LIBFT_FLAG 		=	-Llibft -lft
 LIBFT_LIB 		= 	$(FLAG_FT)
 LIBFT_INC		=	$(addprefix $(LIBFT_PATH)/, $(PATH_INC))
-LIBFT			=	$(addprefix $(LIBFT_PATH)/, $(LIBFT_NAME))
 
 MINILIBX_PATH	= 	libmlx
-MINILIBX_NAME	= 	libmlx.a
+MINILIBX_NAME	= 	libmlx_Linux.a
+MINILIBX_LIB	=	-Llibmlx -lmlx_Linux
 
 CC				=	gcc
 INCLUDES		=	-I$(LIBFT_INC) -I$(MINILIBX_PATH) -I$(PATH_INC)
-CFLAGS			=	-Wall -Wextra # REVIEW Add -Werror
-C-O				=	$(CC) $(CFLAGS) -D DEBUG=$(DEBUG) $(LIBFT_LIB) $(INCLUDES) -c $< -o $@
+CFLAGS			=	-Wall -Wextra -Werror
+C-O				=	$(CC) $(CFLAGS) $(LIBFT_LIB) $(INCLUDES) -c $< -o $@
 
 DIRS_LIST	= engine parsing keycontrol entities
 
-all $(DEBUG):	$(LIBFT_NAME) $(MINILIBX_NAME) $(NAME)
+all:	$(LIBFT_NAME) $(MINILIBX_NAME) $(NAME)
 	@ printf "\033[0;38;5;82mCompilation de \033[1mCub3D \033[0;38;5;82mreussis.\n\033[0m"
 
 $(NAME): $(OBJS) $(INCS) comp
@@ -71,17 +71,16 @@ $(MINILIBX_NAME):
 	@ make -C $(MINILIBX_PATH)
 	@ printf "\033[0;38;5;82mCompilation de la \033[1m$@ \033[0;38;5;82mreussis.\n\033[0m"
 
+bonus: all
+
 clean:
 	@ /bin/rm -rf $(PATH_OBJ)
 	@ make -C $(LIBFT_PATH) clean
 	@ make -C $(MINILIBX_PATH) clean
 
-cleanperso:
-	@ /bin/rm -rf $(PATH_OBJ)
-
 fclean: clean
 	@ make -C $(LIBFT_PATH) fclean
-	@ /bin/rm -rf $(NAME) ./$(NAME)*
+	@ /bin/rm -rf $(NAME) ./$(NAME)* ./*bmp
 	@ printf "\033[0;38;5;160mSuppression de \033[1m$(NAME)/$(PATH_OBJ) ..."
 	@ sleep 0.5
 	@ printf "\r                                                                                          \r\033[0m"
@@ -91,6 +90,6 @@ fclean: clean
 	@ printf "\033[0;38;5;82mSuppression des fichiers de compilation reussis pour \033[1mCub3D.\n"
 
 comp:
-	@ $(CC) $(CFLAGS) -O2 -o $(NAME) libmlx/libmlx.a libft/libft.a $(OBJS) -framework OpenGL -framework AppKit main.c
+	$(CC) $(CFLAGS) -o $(NAME) main.c $(OBJS) -Llibft -lft -Llibmlx -lmlx -lX11 -lbsd -lm -lpthread -lXext
 
 re: fclean all

@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   floor_and_ceil2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlecaill <nlecaill@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: dgascon <dgascon@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 16:17:42 by nlecaill          #+#    #+#             */
-/*   Updated: 2020/02/28 16:53:26 by nlecaill         ###   ########lyon.fr   */
+/*   Updated: 2020/05/05 19:04:55 by dgascon          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define _GNU_SOURCE
 #include "cub3d.h"
+
+int			darken_wall(float dist, int val)
+{
+	int		argb[4];
+	float	coef;
+
+	argb[0] = (val >> 24) & 0xFF;
+	argb[1] = (val >> 16) & 0xFF;
+	argb[2] = (val >> 8) & 0xFF;
+	argb[3] = val & 0xFF;
+	if (dist >= (4 * BLOCK_SIZE))
+	{
+		coef = (dist / (4 * BLOCK_SIZE)) * (dist / (4 * BLOCK_SIZE));
+		argb[1] /= coef;
+		argb[2] /= coef;
+		argb[3] /= coef;
+	}
+	return (rgb_int(argb[0], argb[1], argb[2], argb[3]));
+}
 
 static void	floor_ceil_v(t_data *data, t_floor *floor, t_floor *ceil)
 {
@@ -21,14 +41,14 @@ static void	floor_ceil_v(t_data *data, t_floor *floor, t_floor *ceil)
 	if (data->raycast.alpha > M_PI_2 && data->raycast.alpha < _3PI2)
 	{
 		data->raycast.gamma = M_PI - data->raycast.alpha;
-		__sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
+		sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
 		floor->delta.x = floor->dist * sincos.y;
 		ceil->delta.x = ceil->dist * sincos.y;
 	}
 	else
 	{
 		data->raycast.gamma = data->raycast.alpha - _2PI;
-		__sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
+		sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
 		floor->delta.x = floor->dist * sincos.y * -1;
 		ceil->delta.x = ceil->dist * sincos.y * -1;
 	}
@@ -45,14 +65,14 @@ static void	floor_ceil_h(t_data *data, t_floor *floor, t_floor *ceil)
 	if (data->raycast.alpha > 0 && data->raycast.alpha < M_PI)
 	{
 		data->raycast.gamma = data->raycast.alpha - (M_PI_2);
-		__sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
+		sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
 		floor->delta.y = floor->dist * sincos.y;
 		ceil->delta.y = ceil->dist * sincos.y;
 	}
 	else
 	{
 		data->raycast.gamma = (_3PI2) - data->raycast.alpha;
-		__sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
+		sincosf(data->raycast.gamma, &sincos.x, &sincos.y);
 		floor->delta.y = floor->dist * sincos.y * -1;
 		ceil->delta.y = ceil->dist * sincos.y * -1;
 	}
@@ -82,8 +102,10 @@ int			floor_ceil_color(t_data *data, float c_const[4], int qte_mur_sur_hdv
 		* (data->raycast.inter.x + ceil.delta.x)) % (data->w_tex[5].size.x);
 	ceil.pos.y = (int)(((float)data->w_tex[5].size.y / BLOCK_SIZE)
 		* (data->raycast.inter.y + ceil.delta.y)) % (data->w_tex[5].size.y);
-	*val2 = darken_wall(data, (data->raycast.dist / cosf(data->raycast.beta)) - ceil.dist, *(int*)(data->w_tex[5].add_image
-		+ (data->w_tex[5].size_line * ceil.pos.y) + (ceil.pos.x * sizeof(int))));
-	return (darken_wall(data, (data->raycast.dist / cosf(data->raycast.beta))- floor.dist , *(int*)(data->w_tex[4].add_image
-	+ (data->w_tex[4].size_line * floor.pos.y) + (floor.pos.x * sizeof(int)))));
+	*val2 = darken_wall((data->raycast.dist / cosf(data->raycast.beta)) -
+		ceil.dist, *(int*)(data->w_tex[5].add_image + (data->w_tex[5].size_line
+		* ceil.pos.y) + (ceil.pos.x * sizeof(int))));
+	return (darken_wall((data->raycast.dist / cosf(data->raycast.beta)) -
+		floor.dist, *(int*)(data->w_tex[4].add_image +
+		(data->w_tex[4].size_line * floor.pos.y) + floor.pos.x * sizeof(int))));
 }

@@ -1,3 +1,9 @@
-# cub3d
+# Projet graphique (Raycasting)
+# école 42 cursus 2019
 
-me lire : )
+## **Outils graphique:** Minilibx
+
+# uttilisation
+
+
+Projet réalisé par nlecaill et dgascon.
