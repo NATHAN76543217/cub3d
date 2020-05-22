@@ -5,10 +5,10 @@
 
 # uttilisation
 pour obtenir une sauvegarde de la 1er vue
-> make && ./Cub3d --save 
+> make  &&  ./Cub3d  --save 
 
 pour lancer une map
-> make && ./Cub3d path_to_map
+> make  &&  ./Cub3d  path_to_map
 
 
 ---------
