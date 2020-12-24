@@ -1,5 +1,5 @@
-# Projet graphique (Raycasting)
-# école 42 cursus 2019
+# Raycaster wolfenstein3D-like
+# 42 school graphic project
 
 ## **Outils graphique:** Minilibx
 
